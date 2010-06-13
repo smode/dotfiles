@@ -1,0 +1,73 @@
+# beep 音消す
+xset -b
+# For emacs -nw
+export VTE_CJK_WIDTH="wide"
+
+# ---- language-env DON'T MODIFY THIS LINE!
+# 以下のシェル変数によって、動作が変わります。
+LANG=ja_JP.UTF-8
+export LANG
+
+#=======================================================================
+# 日本語入力 (XIM) の設定
+# XIM サーバーの名前を定義する
+# (XIM, XIM2 は、language-env だけで使うシェル変数です)
+XIM=skkinput
+XIM2=
+# XIM サーバーを起動する
+if type $XIM &> /dev/null
+then
+  $XIM $XIM2 &
+fi
+XMODIFIERS=@im=$XIM
+export XMODIFIERS
+
+#=======================================================================
+# ターミナルエミュレータ (xterm, kterm, rxvt, ...) を起動する
+# .xsession の、language-env が書き込んだよりも前で $TERMINAL_EMULATOR を
+# 設定すると、動作が変わります。
+# $TERMINAL_EMULATOR が設定されていれば、それを起動する。
+# $TERMINAL_EMULATOR が NONE なら、起動しない。
+#      ウィンドウマネージャーから起動するなどの場合に指定してください。
+# $TERMINAL_EMULATOR が設定されていなければ、デフォルトの動作
+#      (krxvt -> kterm -> rxvt -> Eterm -> gnome-terminal -> xterm の順で検索)
+#
+# krxvt は、rxvt-ml パッケージに入っている日本語対応 rxvt です。
+#-----------------------------------------------------------------------
+
+# まず mlterm を探す
+if [ -z "$TERMINAL_EMULATOR" ] ; then
+  if type mlterm &> /dev/null ; then
+      XMODIFIERS=@im=$XIM mlterm --login &
+  elif type krxvt &> /dev/null ; then
+    XMODIFIERS=@im=$XIM krxvt -ls &
+  elif type kterm &> /dev/null ; then
+    kterm -ls &
+  elif type rxvt &> /dev/null ; then
+    XMODIFIERS=@im=$XIM rxvt -ls &
+  elif type Eterm &> /dev/null ; then
+    Eterm -l &
+  elif type gnome-terminal &> /dev/null ; then
+    gnome-terminal --login &
+  elif type xterm &> /dev/null ; then
+    xterm -ls &
+  fi
+elif [ "$TERMINAL_EMULATOR" != "NONE" ] ; then
+    $TERMINAL_EMULATOR &
+fi
+
+#=======================================================================
+# セッションマネージャ、ウィンドウマネージャ、ターミナルエミュレータの
+# いずれかを実行します。 最低どれかひとつは必要です。
+# 実行するウィンドウマネージャを $WINDOW_MANAGER で指定可能です。
+if [ -x "$WINDOW_MANAGER" ]; then
+  realstartup=$WINDOW_MANAGER
+elif [ -x /usr/bin/x-session-manager ]; then
+  realstartup=x-session-manager
+elif [ -x /usr/bin/x-window-manager ]; then
+  realstartup=x-window-manager
+elif [ -x /usr/bin/x-terminal-emulator ]; then
+  realstartup=x-terminal-emulator
+fi
+exec $realstartup
+# ---- language-env end DON'T MODIFY THIS LINE!

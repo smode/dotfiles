@@ -1,0 +1,14 @@
+! Define XIM server name
+#define XIM skkinput
+
+Kinput2*conversionStartKeys: Shift<Key>space
+skkinput*conversionStartKey: Shift<Key>space
+
+Emacs*xn|Language: C
+XEmacs*xn|Language: C
+
+*inputMethod: XIM
+*allowSendEvents: True
+*preeditType: OverTheSpot,Root
+Xedit*international: true
+

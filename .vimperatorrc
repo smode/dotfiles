@@ -1,0 +1,42 @@
+" 1.2 (created: 2008/08/16 18:51:52)
+" Mappings
+map j 3<C-e>
+map k 3<C-y>
+map h <A-Left>
+map l <A-Right>
+map H gT
+map L gt
+map <Left> gT
+map <Left> gt
+
+"nicocontroller
+map ,ni :nicoinfo
+map ,np :nicopause
+map ,nm :nicomute
+map ,nv :nicommentvisible
+map ,nz :nicosize
+map ,ns :nicoseek
+
+" dirct_bookmarks
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+
+" Options
+
+set visualbell
+
+" Change the browser title.
+set titlestring = Firefox
+set ft=firefox
+" Abbreviations
+
+source! ~/_vimperatorrc.local
+
+" vim: set ft=firefox:
+
+" hatena
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+
+
+" plugin_loader.js
+let g:plugin_loader
