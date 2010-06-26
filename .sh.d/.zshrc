@@ -1,7 +1,4 @@
 # ---- language-env DON'T MODIFY THIS LINE!
-# ----- åŸ’ºæœ’¬çš„ã’ªè’¨­’å®š -----
-# XIM ã‚’µãƒ’¼ãƒãƒ’¼ã’®åå‰ã‚’’å®š’ç¾’©ã™ã‚‹
-# (XIM ã’¯ã€languge-env ã ã‘ã’§ä’½¿ã†ã‚’·ã‚’§ãƒ’«å¤‰æ•’°ã’§ã™)
 XIM=skkinput
 
 JLESSCHARSET=utf-8
@@ -111,4 +108,29 @@ bindkey "^[[5~" history-beginning-search-backward-end
 bindkey "^[[6~" history-beginning-search-forward-end
 
 
+
+setopt nolistbeep
+
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end 
+
+setopt auto_cd
+setopt auto_pushd
+setopt correct
+setopt complete_aliases # aliased ls needs
+
+autoload zed
+
+# äºˆæ¸¬å…¥åŠ›ï¿½
+autoload predict-on
+predict-on
+zle -N predict-on
+zle -N predict-off
+bindkey '^xp' predict-on
+bindkey '^x^p' predict-off
+
+zstyle ':completion:*' list-colors '--color'
 
