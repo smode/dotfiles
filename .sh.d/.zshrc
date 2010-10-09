@@ -1,17 +1,10 @@
 # ---- language-env DON'T MODIFY THIS LINE!
-XIM=skkinput
-
-JLESSCHARSET=utf-8
-LANG=ja_JP.UTF-8
-LV=-Ou8
-
-SHELL=/bin/zsh
-
-export XIM
-export LANG
-export JLESSCHARSET
-export LV
-export SHELL
+export XIM=skkinput
+export JLESSCHARSET=utf-8
+export LANG=ja_JP.UTF-8
+export LV=-Ou8
+export SHELL=/bin/zsh
+export PAGER=lv
 
 umask 022
 
@@ -24,7 +17,7 @@ if test -x /usr/bin/dircolors ; then
   fi
 fi
 LS_OPTIONS=--color=tty
-LS_OPTIONS="-N $LS_OPTIONS -T 0"
+LS_OPTIONS="-N $LS_OPTIONS -T 1"
 
 #Emacs shell mode
 if test "$EMACS" = "t" ; then
@@ -52,14 +45,12 @@ HISTSIZE=65536
 HISTFILE=${HOME}/.sh.d/.zsh_history
 SAVEHIST=65536
 
-# Prompt on the right side. zsh feature
-# RPROMPT="[%T]"
-
 # Set/unset  shell options
 setopt   globdots nocorrect pushdtohome autolist nopromptcr
 setopt   nocorrectall autocd recexact longlistjobs autoresume
 setopt   histignoredups pushdsilent appendhistory histexpiredupsfirst
 setopt   autopushd pushdminus extendedglob rcquotes
+setopt   nolistbeep
 unsetopt bgnice autoparamslash hup
 
 # Setup some basic programmable completions.  To see more examples
@@ -109,8 +100,6 @@ bindkey "^[[6~" history-beginning-search-forward-end
 
 
 
-setopt nolistbeep
-
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -134,3 +123,32 @@ bindkey '^x^p' predict-off
 
 zstyle ':completion:*' list-colors '--color'
 
+TEXINPUTS=".:$HOME/.texmf//:"
+export TEXINPUTS
+
+BIBINPUTS=".:$HOME/bib//:"
+export BIBINPUTS
+
+BSTINPUTS=".:$HOME/.texmf/bst//:"
+export BSTINPUTS
+
+PKG_CONFIG_PATH=~/local/lib/pkgconfig
+export PKG_CONFIG_PATH
+
+LD_LIBRARY_PATH=~/local/lib
+export LD_LIBRARY_PATH
+
+PATH=$PATH:$HOME/local/bin
+export PATH
+
+PATH=$PATH:$HOME/bin
+export PATH
+
+PATH=/usr/X11R6/bin:$PATH
+export PATH
+
+RUBYLIB=/usr/local/lib/site_ruby/1.8
+export PATH
+
+GIT_PROXY_COMMAND=$HOME/bin/git-proxy.sh 
+export GIT_PROXY_COMMAND
